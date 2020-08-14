@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+#checks if package is installed if not then installs it
+function chk_package()  {
+  for i in $@; do
+    if ! dpkg -s "$i" >/dev/null 2>&1; then
+      sudo apt install -y $i
+    fi
+  done
+}
+
+#install Old School RuneScape from official site it requires root privliages, default-jre and msitools.
+function install_osrs() {
+  local tmpDir="/tmp/osrs"
+  chk_package default-jre msitools
+  if [ -e $tmpDir ]; then
+    rm -rf $tmpDir
+    mkdir $tmpDir
+  else
+    mkdir $tmpDir
+  fi
+  wget -O $tmpDir/OldSchool.msi http://www.runescape.com/downloads/oldschool.msi
+  msiextract $tmpDir/OldSchool.msi -C $tmpDir
+  sudo cp $tmpDir/jagexlauncher/jagexlauncher/bin/jagexappletviewer.jar /usr/local/bin/jagexappletviewer.jar
+  sudo cp $tmpDir/jagexlauncher/jagexlauncher/oldschool/jagexappletviewer.png /usr/local/share/jagexappletviewer.png
+  sudo chmod 755 /usr/local/bin/jagexappletviewer.jar
+  rm -rf $tmpDir/
+}
+
+function update_dfiles() {
+  mv -f $HOME/Dotfiles $HOME/tmpDotfiles
+  if ! git clone $DFileRepo; then #$DFileRepo in .localdf
+    mv -f $HOME/tmpDotfiles $HOME/Dotfiles
+    echo "Something went wrong with the github clone. Files restored"
+  else
+    sudo rm -r $HOME/tmpDotfiles
+    echo "Dotfiles updated successfully"
+  fi
+
+}
