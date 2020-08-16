@@ -1,10 +1,22 @@
 #!/usr/bin/env bash
 
+#Ask to Confirm before continue
+function confirm() {
+  echo "Are you sure you want to $@? ( Yes/No y/n )"
+  read answer
+  local lAnswer=$(echo $answer | tr '[:upper:]' '[:lower:]')
+  if [ "$lAnswer" == "yes" ] || [ "$lAnswer" == "y" ]; then
+    return 0
+  else
+    return 1
+  fi
+}
+
 #checks if package is installed if not then installs it
-function chk_package()  {
-  for i in $@; do
-    if ! dpkg -s "$i" >/dev/null 2>&1; then
-      sudo apt install -y $i
+function chk_package() {
+  for arg in $@; do
+    if ! dpkg -s "$arg" >/dev/null 2>&1; then
+      sudo apt install -y $arg
     fi
   done
 }
@@ -27,14 +39,28 @@ function install_osrs() {
   rm -rf $tmpDir/
 }
 
-function update_dfiles() {
-  mv -f $HOME/Dotfiles $HOME/tmpDotfiles
-  if ! git clone $DFileRepo; then #$DFileRepo in .localdf
-    mv -f $HOME/tmpDotfiles $HOME/Dotfiles
-    echo "Something went wrong with the github clone. Files restored"
-  else
-    sudo rm -r $HOME/tmpDotfiles
-    echo "Dotfiles updated successfully"
-  fi
-
+function dfiles() {
+  for arg in $@; do
+    if [ $arg == "update" ] || [ $arg == "-u" ]; then
+      mv -f $HOME/Dotfiles $HOME/tmpDotfiles
+      echo "files moved to tmp"
+      if ! git clone $DFileRepo; then #$DFileRepo in .localdf
+        mv -f $HOME/tmpDotfiles $HOME/Dotfiles
+        echo "Something went wrong with the github clone. Files restored"
+      else
+        sudo rm -r $HOME/tmpDotfiles
+        echo "Dotfiles updated successfully"
+      fi
+    elif [ $arg == "remove" ] || [ $arg == "-r" ]; then
+      if confirm Remove Dotfiles; then
+        for dFile in $HOME/.{aliases,bash_profile,bashrc,functions,profile,vimrc}; do
+          sudo rm $dFile
+        done
+        sudo rm -r $HOME/Dotfiles && echo "Dotfiles successfully removed"
+        if [ -f $HOME/OriginalDotFiles ]; then
+          mv -v $HOME/OriginalDotFiles/* $HOME/ && echo "Original dotfiles successfully restored."
+        fi
+      fi
+    fi
+  done
 }
