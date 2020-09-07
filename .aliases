@@ -10,10 +10,11 @@ alias -- -="cd -"
 alias cl="clear"
 
 #Python Shortcuts
+alias pip2="pip"
 alias py="python3"
 alias pip="pip3"
 alias py2="python2"
-alias pip2="pip"
+
 
 # Shortcuts
 alias dl="cd ~/Downloads"
@@ -51,7 +52,7 @@ alias egrep='egrep --color=auto'
 
 # Enable aliases to be sudo’ed
 alias sudo='sudo '
-
+alias scroff="gsettings set org.gnome.desktop.session idle-delay" #add number to end for minutes 0 for none
 # Get week number
 alias week='date +%V'
 
