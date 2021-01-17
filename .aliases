@@ -14,6 +14,7 @@ alias pip2="pip"
 alias py="python3"
 alias pip="pip3"
 alias py2="python2"
+alias chkmail="cat /var/spool/mail/$USER"
 
 
 # Shortcuts
@@ -31,6 +32,10 @@ else # macOS `ls`
 	colorflag="-G"
 	export LSCOLORS='BxBxhxDxfxhxhxhxhxcxcx'
 fi
+
+#Desktop settings
+alias scroff="gsettings set org.gnome.desktop.session idle-delay" #add number to end for minutes 0 for none
+alias resetdock="dconf reset -f /org/gnome/shell/extensions/dash-to-dock/"
 
 # List all files colorized in long format
 alias l="ls -lF ${colorflag}"
