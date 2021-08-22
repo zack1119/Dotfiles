@@ -34,7 +34,7 @@ else # macOS `ls`
 fi
 
 #Desktop settings
-alias scroff="gsettings set org.gnome.desktop.session idle-delay" #add number to end for minutes 0 for none
+alias scroff="gsettings set org.gnome.desktop.session idle-delay" #add number to end for seconds 0 for none
 alias resetdock="dconf reset -f /org/gnome/shell/extensions/dash-to-dock/"
 
 # List all files colorized in long format
@@ -114,5 +114,3 @@ alias vol25="amixer -D pulse sset Master 25%"
 alias vol50="amixer -D pulse sset Master 50%"
 alias vol75="amixer -D pulse sset Master 75%"
 alias vol90="amixer -D pulse sset Master 90%"
-
-alias wanip='dig @resolver1.opendns.com ANY myip.opendns.com +short'
