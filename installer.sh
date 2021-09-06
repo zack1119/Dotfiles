@@ -35,10 +35,10 @@ fi
 
 #checks for defualt ssh .config if not there then copys sample from Dotfiles
 if [ -e $HOME/.ssh ]; then
-  if [ ! -e $HOME/.ssh/.config ]; then
-    cp $HOME/Dotfiles/.ssh/.config $HOME/.ssh/.config
+  if [ ! -e $HOME/.ssh/config ]; then
+    cp $HOME/Dotfiles/.ssh/config $HOME/.ssh/config
   fi
 else
   mkdir $HOME/.ssh
-  cp $HOME/Dotfiles/.ssh/.config $HOME/.ssh/.config
+  cp $HOME/Dotfiles/.ssh/config $HOME/.ssh/config
 fi

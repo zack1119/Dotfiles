@@ -10,10 +10,10 @@ alias -- -="cd -"
 alias cl="clear"
 
 #Python Shortcuts
-alias pip2="pip"
-alias py="python3"
 alias pip="pip3"
+alias pip2="pip"
 alias py2="python2"
+alias py="python3"
 alias chkmail="cat /var/spool/mail/$USER"
 
 
