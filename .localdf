@@ -6,6 +6,9 @@
   alias osrsins="install_osrs()" #run to update aswell
   alias osrs="java -Duser.home=$HOME -Dsun.java2d.uiScale=2 -Dsun.java2d.xrender=True -Dsun.java2d.opengl=true -Dsun.java2d.xrender=True -Djava.class.path=/usr/local/bin/jagexappletviewer.jar -Dcom.jagex.config=http://oldschool.runescape.com/jav_config.ws jagexappletviewer /usr/local/share/"
 #Exports
+  #scroff() default time out
+  export ScrOffDefault="20"
+  #Github
   export DFileRepo="https://github.com/zack1119/Dotfiles.git"
   #Email
   export Email_User="TestUsr"

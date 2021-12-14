@@ -64,3 +64,11 @@ function dfiles() {
     fi
   done
 }
+
+function scroff() {
+  if [ $(gsettings get org.gnome.desktop.session idle-delay | cut -d " " -f2- | sed 's/[^0-9]*//g') = 0 ]; then
+    gsettings set org.gnome.desktop.session idle-delay 20
+  else
+    gsettings set org.gnome.desktop.session idle-delay $ScrOffDefault
+  fi
+}
