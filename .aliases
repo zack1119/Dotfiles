@@ -34,7 +34,6 @@ else # macOS `ls`
 fi
 
 #Desktop settings
-alias scroff="gsettings set org.gnome.desktop.session idle-delay" #add number to end for seconds 0 for none
 alias resetdock="dconf reset -f /org/gnome/shell/extensions/dash-to-dock/"
 
 # List all files colorized in long format
